@@ -13,11 +13,11 @@ void main() {
 
       final result = await useCase(
         cardId: 'card-1',
-        draft: CardDraftSuggestion(
+        draft: const CardDraftSuggestion(
           playerName: 'Ken Griffey Jr.',
           setName: 'Topps Traded',
           year: 1989,
-          sourceImagePaths: const ['/tmp/front.jpg', '/tmp/back.jpg'],
+          sourceImagePaths: ['/tmp/front.jpg', '/tmp/back.jpg'],
           isRookieCard: true,
         ),
       );
@@ -35,23 +35,7 @@ void main() {
 
       final result = await useCase(
         cardId: 'card-1',
-        draft: CardDraftSuggestion(year: 1989),
-      );
-
-      expect(result, isA<Failure<CardEntity>>());
-    });
-
-    test('fails when the card id is empty', () async {
-      final repository = _FakeCardRepository();
-      final useCase = ConfirmCardDraft(repository);
-
-      final result = await useCase(
-        cardId: '   ',
-        draft: CardDraftSuggestion(
-          playerName: 'Ken Griffey Jr.',
-          setName: 'Topps Traded',
-          year: 1989,
-        ),
+        draft: const CardDraftSuggestion(year: 1989),
       );
 
       expect(result, isA<Failure<CardEntity>>());

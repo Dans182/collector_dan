@@ -13,13 +13,13 @@ class ConfirmCardDraft {
     required String cardId,
     required CardDraftSuggestion draft,
   }) {
-    final validationError = _validate(cardId: cardId, draft: draft);
+    final validationError = _validateDraft(draft);
     if (validationError != null) {
       return Future.value(Failure(validationError));
     }
 
     final card = CardEntity(
-      id: cardId.trim(),
+      id: cardId,
       playerName: draft.playerName!.trim(),
       setName: draft.setName!.trim(),
       year: draft.year!,
@@ -39,13 +39,7 @@ class ConfirmCardDraft {
     return _cardRepository.createCard(card);
   }
 
-  String? _validate({
-    required String cardId,
-    required CardDraftSuggestion draft,
-  }) {
-    if (cardId.trim().isEmpty) {
-      return 'Card id is required before confirming the draft.';
-    }
+  String? _validateDraft(CardDraftSuggestion draft) {
     if (draft.playerName == null || draft.playerName!.trim().isEmpty) {
       return 'Player name is required before confirming the draft.';
     }

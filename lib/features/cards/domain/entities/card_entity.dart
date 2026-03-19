@@ -1,9 +1,7 @@
-import 'dart:collection';
-
 import 'card_image_entity.dart';
 
 class CardEntity {
-  CardEntity({
+  const CardEntity({
     required this.id,
     required this.playerName,
     required this.setName,
@@ -18,8 +16,8 @@ class CardEntity {
     this.isGraded = false,
     this.graderCompany,
     this.gradeValue,
-    List<CardImageEntity> images = const [],
-  }) : images = UnmodifiableListView(images);
+    this.images = const [],
+  });
 
   final String id;
   final String playerName;
@@ -35,7 +33,7 @@ class CardEntity {
   final bool isGraded;
   final String? graderCompany;
   final double? gradeValue;
-  final UnmodifiableListView<CardImageEntity> images;
+  final List<CardImageEntity> images;
 
   CardEntity copyWith({
     String? id,

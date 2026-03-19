@@ -1,9 +1,7 @@
-import 'dart:collection';
-
 import 'card_image_entity.dart';
 
 class CardDraftSuggestion {
-  CardDraftSuggestion({
+  const CardDraftSuggestion({
     this.playerName,
     this.year,
     this.teamId,
@@ -19,14 +17,12 @@ class CardDraftSuggestion {
     this.isGraded,
     this.graderCompany,
     this.gradeValue,
-    List<CardImageEntity> images = const [],
-    List<String> sourceImagePaths = const [],
+    this.images = const [],
+    this.sourceImagePaths = const [],
     this.rawExtractedText = '',
     this.overallConfidence = 0,
-    Map<String, double> fieldConfidence = const {},
-  })  : images = UnmodifiableListView(images),
-        sourceImagePaths = UnmodifiableListView(sourceImagePaths),
-        fieldConfidence = UnmodifiableMapView(fieldConfidence);
+    this.fieldConfidence = const {},
+  });
 
   final String? playerName;
   final int? year;
@@ -43,11 +39,11 @@ class CardDraftSuggestion {
   final bool? isGraded;
   final String? graderCompany;
   final double? gradeValue;
-  final UnmodifiableListView<CardImageEntity> images;
-  final UnmodifiableListView<String> sourceImagePaths;
+  final List<CardImageEntity> images;
+  final List<String> sourceImagePaths;
   final String rawExtractedText;
   final double overallConfidence;
-  final UnmodifiableMapView<String, double> fieldConfidence;
+  final Map<String, double> fieldConfidence;
 
   CardDraftSuggestion copyWith({
     String? playerName,
@@ -97,6 +93,4 @@ class CardDraftSuggestion {
 
   bool get hasMinimumViableData =>
       (playerName?.trim().isNotEmpty ?? false) && year != null && (setName?.trim().isNotEmpty ?? false);
-
-  double confidenceFor(String fieldName) => fieldConfidence[fieldName] ?? 0;
 }
