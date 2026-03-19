@@ -1,0 +1,10 @@
+name: collector_dan
+publish_to: none
+description: Mobile-first baseball card collection manager scaffold with OCR-assisted capture domain contracts.
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dev_dependencies:
+  test: ^1.25.2
